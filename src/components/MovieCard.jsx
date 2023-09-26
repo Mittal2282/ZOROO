@@ -1,27 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { Image, Text } from "@chakra-ui/react";
-import { HStack, VStack } from "@chakra-ui/react";
+import { HStack, VStack, Center } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
 import turnicate from "../utils/turnicate";
+import { BiStar } from "react-icons/bi";
+import { BsFillPlayCircleFill } from "react-icons/bs";
 const MovieCard = ({ movieData }) => {
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
   return (
-    <Box>
+    <Box
+      pos={"relative"}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {isHovering && (
+        <Box zIndex={1} w={"full"} h={"full"} pos={"absolute"} top={0} left={0}>
+          <HStack
+            w="full"
+            h={"full"}
+            alignItems={"center"}
+            justifyContent={"center"}
+          >
+            <Box mt={-20}>
+              <BsFillPlayCircleFill fill="#00acc1" size={"75"} />
+            </Box>
+          </HStack>
+        </Box>
+      )}
       <Image
-        h={185}
+        h={225}
         w="full"
+        borderRadius={"md"}
         objectFit="cover"
         src={`https://image.tmdb.org/t/p/w185${movieData.poster_path}`}
       />
-      <VStack alignItems="flex-start" gap={0}>
+      <VStack pt={2} alignItems="flex-start" gap={1}>
         <Text as="b" fontSize="sm">
           <Tooltip label={movieData.original_title}>
             {turnicate(movieData.original_title, 15)}
           </Tooltip>
         </Text>
-        <HStack fontSize="xs" w={"full"} justifyContent={"space-between"}>
+        <HStack
+          color={"grey"}
+          fontSize="xs"
+          w={"full"}
+          justifyContent={"space-between"}
+        >
           <Text>{movieData.release_date}</Text>
-          <Text>{movieData.vote_average}</Text>
+          <HStack gap={1}>
+            <BiStar />
+            <Text>{movieData.vote_average}</Text>
+          </HStack>
         </HStack>
       </VStack>
     </Box>
@@ -30,4 +67,5 @@ const MovieCard = ({ movieData }) => {
 
 export default MovieCard;
 
-// turnicate , tooltip
+// banner bg blur
+// image hover blur

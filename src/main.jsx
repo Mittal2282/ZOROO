@@ -11,9 +11,13 @@ import {
 
 const queryClient = new QueryClient();
 
+import { ColorModeScript } from "@chakra-ui/react";
+import theme from "./theme";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <App />
     </QueryClientProvider>
   </React.StrictMode>

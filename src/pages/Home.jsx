@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { Box, SimpleGrid, Heading } from "@chakra-ui/react";
+import { Box, SimpleGrid, SkeletonText, Heading } from "@chakra-ui/react";
 
 import MovieCard from "../components/MovieCard";
 import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import { useState, useRef, useCallback } from "react";
+import MovieBanner from "../components/MovieBanner";
 
 const Home = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -49,24 +50,33 @@ const Home = () => {
   );
 
   return (
-    <Box mt="200">
-      <Heading size="md">Trending</Heading>
-      {isLoading && pageNumber == 1 && <MovieListSkeleton />}
-      {
-        <SimpleGrid minChildWidth="150px" spacing="15px">
-          {movies.map((movie, index) => {
-            return (
-              <Box
-                key={index}
-                ref={index + 1 == movies.length ? lastMovieItemRef : null}
-              >
-                <MovieCard movieData={movie} />
-              </Box>
-            );
-          })}
-        </SimpleGrid>
-      }
-      {isLoading && <MovieListSkeleton />}
+    <Box pb={5}>
+      <MovieBanner movie={movies[0]} />
+      <Box px={15}>
+        <Box my={4}>
+          {isLoading && pageNumber == 1 ? (
+            <SkeletonText skeletonHeight={10} w={100} noOfLines={1} />
+          ) : (
+            <Heading size="md">Trending</Heading>
+          )}
+        </Box>
+        {isLoading && pageNumber == 1 && <MovieListSkeleton />}
+        {
+          <SimpleGrid minChildWidth="150px" spacing="20px">
+            {movies.map((movie, index) => {
+              return (
+                <Box
+                  key={index}
+                  ref={index + 1 == movies.length ? lastMovieItemRef : null}
+                >
+                  <MovieCard movieData={movie} />
+                </Box>
+              );
+            })}
+          </SimpleGrid>
+        }
+        {isLoading && pageNumber != 1 && <MovieListSkeleton />}
+      </Box>
     </Box>
   );
 };
