@@ -65,7 +65,7 @@ const Home = () => {
       <Box my={20} px={20}>
         <Box my={5}>
           {isLoading && pageNumber == 1 ? (
-            <SkeletonText skeletonHeight={20} w={300} noOfLines={1} />
+            <SkeletonText skeletonHeight={10} w={300} noOfLines={1} />
           ) : (
             <Heading size="lg">Trending</Heading>
           )}
