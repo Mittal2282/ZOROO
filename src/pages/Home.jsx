@@ -10,9 +10,17 @@ const Home = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [movies, setMovies] = useState([]);
 
-  const { isLoading, data, error } = useQuery(
+  const { isLoading } = useQuery(
     ["popular", pageNumber],
     async () => {
+      const delay = Math.floor(Math.random() * (4000 - 2000 + 1)) + 2000;
+
+      const delayPromise = new Promise((resolve) => {
+        setTimeout(resolve, delay);
+      });
+
+      await delayPromise;
+
       let response = await fetch(
         `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageNumber}`,
         {
@@ -20,7 +28,7 @@ const Home = () => {
           headers: {
             accept: "application/json",
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODg0NjAxOTM1YmZmMmE5MmUwNmVjN2ZmMjc5N2IzMyIsInN1YiI6IjY0OTIyNjBiZWRhNGI3MDBlYzRiNGE4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vxkjHIi3cqFyE-vt-MCUQBPJOTaVKa57_8iIZm-n_hU",
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODg0NjAxOTM1YmZmMmE9IyJhdWQiOiI3ODg0NjAxOTM1YmZmMmE5MmUwNmVjN2ZmMjc5N2IzMyIsInN1YiI6IjY4NDI1NDU3Mzc4MDkyNDA4MzEwOGFjZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vxkjHIi3cqFyE-vt-MCUQBPJOTaVKa57_8iIZm-n_hU",
           },
         }
       );
@@ -49,20 +57,22 @@ const Home = () => {
     [isLoading, pageNumber]
   );
 
+  const randomIndex = Math.floor(Math.random() * movies.length);
+
   return (
     <Box pb={5}>
-      <MovieBanner movie={movies[0]} />
-      <Box px={15}>
-        <Box my={4}>
+      <MovieBanner movie={movies[randomIndex]} />
+      <Box my={20} px={20}>
+        <Box my={5}>
           {isLoading && pageNumber == 1 ? (
-            <SkeletonText skeletonHeight={10} w={100} noOfLines={1} />
+            <SkeletonText skeletonHeight={20} w={300} noOfLines={1} />
           ) : (
-            <Heading size="md">Trending</Heading>
+            <Heading size="lg">Trending</Heading>
           )}
         </Box>
         {isLoading && pageNumber == 1 && <MovieListSkeleton />}
         {
-          <SimpleGrid minChildWidth="150px" spacing="20px">
+          <SimpleGrid minChildWidth="200px" spacing="20px">
             {movies.map((movie, index) => {
               return (
                 <Box

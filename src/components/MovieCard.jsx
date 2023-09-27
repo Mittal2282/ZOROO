@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box } from "@chakra-ui/react";
 import { Image, Text } from "@chakra-ui/react";
-import { HStack, VStack, Center } from "@chakra-ui/react";
+import { HStack, VStack } from "@chakra-ui/react";
 import { Tooltip } from "@chakra-ui/react";
 import turnicate from "../utils/turnicate";
 import { BiStar } from "react-icons/bi";
@@ -16,32 +16,42 @@ const MovieCard = ({ movieData }) => {
     setIsHovering(false);
   };
   return (
-    <Box
-      pos={"relative"}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      {isHovering && (
-        <Box zIndex={1} w={"full"} h={"full"} pos={"absolute"} top={0} left={0}>
-          <HStack
-            w="full"
+    <Box>
+      <Box
+        pos={"relative"}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <Image
+          h={250}
+          w="full"
+          borderRadius={"md"}
+          objectFit="cover"
+          src={`https://image.tmdb.org/t/p/w185${movieData.poster_path}`}
+        />
+        {isHovering && (
+          <Box
+            zIndex={1}
+            w={"full"}
             h={"full"}
-            alignItems={"center"}
-            justifyContent={"center"}
+            pos={"absolute"}
+            top={0}
+            left={0}
           >
-            <Box mt={-20}>
-              <BsFillPlayCircleFill fill="#00acc1" size={"75"} />
-            </Box>
-          </HStack>
-        </Box>
-      )}
-      <Image
-        h={225}
-        w="full"
-        borderRadius={"md"}
-        objectFit="cover"
-        src={`https://image.tmdb.org/t/p/w185${movieData.poster_path}`}
-      />
+            <HStack
+              w="full"
+              h={"full"}
+              alignItems={"center"}
+              justifyContent={"center"}
+              background="rgba(0, 0, 0, 0.5)"
+            >
+              <Box>
+                <BsFillPlayCircleFill fill="#00acc1" size={"55"} />
+              </Box>
+            </HStack>
+          </Box>
+        )}
+      </Box>
       <VStack pt={2} alignItems="flex-start" gap={1}>
         <Text as="b" fontSize="sm">
           <Tooltip label={movieData.original_title}>
