@@ -1,5 +1,4 @@
-import { Box, SimpleGrid, HStack } from "@chakra-ui/react";
-import React from "react";
+import {  SimpleGrid } from "@chakra-ui/react";
 import MovieCardSkeleton from "./MovieCardSkeleton";
 
 const MovieListSkeleton = () => {

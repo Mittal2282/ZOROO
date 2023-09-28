@@ -77,5 +77,3 @@ const MovieCard = ({ movieData }) => {
 
 export default MovieCard;
 
-// banner bg blur
-// image hover blur
