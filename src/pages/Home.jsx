@@ -83,9 +83,11 @@ const Home = () => {
         <Box>
           <Box mb={5}>
             {isLoading && pageNumber == 1 ? (
-              <SkeletonText skeletonHeight={10} w={300} noOfLines={1} />
+              <SkeletonText skeletonHeight={10} w={150} noOfLines={1} />
             ) : (
-              <Heading size="lg">Trending</Heading>
+              <Text fontWeight={"bold"} fontSize={"xl"}>
+                Trending
+              </Text>
             )}
           </Box>
           {isLoading && pageNumber == 1 && <MovieListSkeleton />}
