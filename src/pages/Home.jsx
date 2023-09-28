@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Box, Text, SimpleGrid, SkeletonText, Heading } from "@chakra-ui/react";
-
+import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
 import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import { useState, useRef, useCallback } from "react";
@@ -10,7 +10,7 @@ const Home = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [movies, setMovies] = useState([]);
 
-  const { isLoading } = useQuery(
+  const { isLoading, isError } = useQuery(
     ["popular", pageNumber],
     async () => {
       const delay = Math.floor(Math.random() * (4000 - 2000 + 1)) + 2000;
@@ -30,6 +30,7 @@ const Home = () => {
         }
       );
       let data = await response.json();
+      console.log(data.results);
       return data.results;
     },
     {
@@ -54,12 +55,18 @@ const Home = () => {
     [isLoading, pageNumber]
   );
 
+  if (isError) {
+    return <Box>Error</Box>;
+  }
+
+  const randomIndex = Math.floor(Math.random() * movies.length);
+
   return (
     <Box pb={5}>
-      <MovieBanner movie={movies[0]} />
+      <MovieBanner movie={movies[randomIndex]} />
       <Box px={20}>
-        <Box py={20}>
-          <Text color={"grey"} fontSize={"sm"}>
+        <Box py={5}>
+          <Text color={"grey"} fontSize={"xs"}>
             Are you looking for the best movie site to make the most of your
             entertainment time? Don’t subscribe to paid streaming services yet
             as you can get the same quality content and features at fmovies for
@@ -74,7 +81,7 @@ const Home = () => {
           </Text>
         </Box>
         <Box>
-          <Box my={5}>
+          <Box mb={5}>
             {isLoading && pageNumber == 1 ? (
               <SkeletonText skeletonHeight={10} w={300} noOfLines={1} />
             ) : (
@@ -83,7 +90,11 @@ const Home = () => {
           </Box>
           {isLoading && pageNumber == 1 && <MovieListSkeleton />}
           {
-            <SimpleGrid minChildWidth="200px" spacing="20px">
+            <SimpleGrid
+              minChildWidth="150px"
+              maxChildWidth="100px"
+              spacing="20px"
+            >
               {movies.map((movie, index) => {
                 return (
                   <Box
