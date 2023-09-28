@@ -1,10 +1,9 @@
-import React from "react";
 import { Box } from "@chakra-ui/react";
 import { Skeleton } from "@chakra-ui/react";
 
 const MovieBannerSkeleton = () => {
   return (
-    <Box h="450px" w="full">
+    <Box h="80vh" w="full">
       <Skeleton h={"full"} />
     </Box>
   );
