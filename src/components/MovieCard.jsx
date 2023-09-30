@@ -6,6 +6,7 @@ import { Tooltip } from "@chakra-ui/react";
 import turnicate from "../utils/turnicate";
 import { BiStar } from "react-icons/bi";
 import { BsFillPlayCircleFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 const MovieCard = ({ movieData }) => {
   const [isHovering, setIsHovering] = useState(false);
 
@@ -16,7 +17,7 @@ const MovieCard = ({ movieData }) => {
     setIsHovering(false);
   };
   return (
-    <Box>
+    <Link to={`/movie/${movieData.id}`}>
       <Box
         pos={"relative"}
         onMouseEnter={handleMouseEnter}
@@ -71,7 +72,7 @@ const MovieCard = ({ movieData }) => {
           </HStack>
         </HStack>
       </VStack>
-    </Box>
+    </Link>
   );
 };
 

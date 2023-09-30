@@ -2,6 +2,8 @@ import { Box, VStack, Text, Heading, Tooltip, Button } from "@chakra-ui/react";
 import MovieBannerSkeleton from "./skeleton/MovieBannerSkeleton";
 import truncate from "../utils/turnicate";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
+
 function MovieBanner({ movie }) {
   if (movie === undefined) {
     return <MovieBannerSkeleton />;
@@ -39,7 +41,7 @@ function MovieBanner({ movie }) {
           </Text>
         </Tooltip>
         <Button mt={"5"} fontSize={"sm"} fontWeight={"sm"}>
-          Watch Now
+          <Link to={`/movie/${movie.id}`}>Watch Now</Link>
         </Button>
       </VStack>
       <Box

@@ -92,11 +92,7 @@ const Home = () => {
           </Box>
           {isLoading && pageNumber == 1 && <MovieListSkeleton />}
           {
-            <SimpleGrid
-              minChildWidth="150px"
-              maxChildWidth="100px"
-              spacing="20px"
-            >
+            <SimpleGrid minChildWidth="150px" spacing="20px">
               {movies.map((movie, index) => {
                 return (
                   <Box

@@ -1,4 +1,12 @@
-import { HStack, Box, Image, Text, Button, Spacer } from "@chakra-ui/react";
+import {
+  HStack,
+  Box,
+  Image,
+  Text,
+  Button,
+  Spacer,
+  SimpleGrid,
+} from "@chakra-ui/react";
 import React from "react";
 import logo from "../../public/logo.png";
 import {
@@ -9,6 +17,8 @@ import {
   PopoverArrow,
 } from "@chakra-ui/react";
 import SearchBox from "./SearchBox";
+import { gener_id_map } from "../utils/genre";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -18,18 +28,28 @@ const Navbar = () => {
       </Box>
       <HStack color={"grey"} fontSize={"sm"} gap={2}>
         <Text _hover={{ cursor: "pointer", color: "white" }} px={3} py={1}>
-          Home
+          <Link to={"/"}>Home</Link>
         </Text>
-        <Popover trigger="hover">
+        <Popover trigger="hover" placement="end-end">
           <PopoverTrigger>
             <Text px={3} py={1} _hover={{ cursor: "pointer", color: "white" }}>
               Genre
             </Text>
           </PopoverTrigger>
-          <PopoverContent>
+          <PopoverContent w={400}>
             <PopoverArrow />
-            <PopoverBody>
-              Are you sure you want to have that milkshake?
+            <PopoverBody p={5}>
+              <SimpleGrid minChildWidth="100px" spacing="10px">
+                {Object.keys(gener_id_map).map((key) => {
+                  return (
+                    <Box>
+                      <Text fontSize={"sm"} textAlign={"justify"}>
+                        <Link to={`/genre/${gener_id_map[key]}`}>{key}</Link>
+                      </Text>
+                    </Box>
+                  );
+                })}
+              </SimpleGrid>
             </PopoverBody>
           </PopoverContent>
         </Popover>
