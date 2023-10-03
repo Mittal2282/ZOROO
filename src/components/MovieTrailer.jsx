@@ -1,7 +1,8 @@
 import React from "react";
 import MovieTrailerSkeleton from "./skeleton/MovieTrailerSkeleton";
 import { useQuery } from "@tanstack/react-query";
-import { Box } from "@chakra-ui/react";
+import { Box, VStack, Text } from "@chakra-ui/react";
+import { MdOutlineSmsFailed } from "react-icons/md";
 
 const MovieTrailer = ({ movieId }) => {
   const { isLoading, isError, data } = useQuery(
@@ -39,6 +40,18 @@ const MovieTrailer = ({ movieId }) => {
   });
 
   trailerArr = trailerArr[0];
+
+  if (trailerArr == undefined) {
+    return (
+      <VStack mt={10} justify={"center"} w="full">
+        <MdOutlineSmsFailed fill="grey" size={"40"} />
+        <Text color={"grey"} fontSize={"md"}>
+          Nothing to show
+        </Text>
+      </VStack>
+    );
+  }
+
   return (
     <Box height={"full"} width={"full"}>
       {
