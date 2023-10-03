@@ -7,6 +7,7 @@ import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import MovieDetail from "../components/MovieDetail";
 import Navbar from "../components/Navbar";
 import MovieDetailBanner from "../components/MovieDetailBanner";
+import SimilarMovies from "../components/SimilarMovies";
 
 function Movie() {
   const param = useParams();
@@ -52,15 +53,6 @@ function Movie() {
             <Box flexGrow={1}>
               <MovieDetailSkeleton />
             </Box>
-
-            <Box gap={2} w={"30%"}>
-              <SkeletonText mb={5} skeletonHeight={10} w={200} noOfLines={1} />
-              <MovieListSkeleton
-                numBoxes={9}
-                height="175px"
-                minimumWidth={"100px"}
-              />
-            </Box>
           </HStack>
         </>
       )}
@@ -85,12 +77,7 @@ function Movie() {
             </VStack>
 
             <Box flexShrink={0} gap={2} w={"30%"}>
-              <SkeletonText mb={5} skeletonHeight={10} w={200} noOfLines={1} />
-              <MovieListSkeleton
-                numBoxes={9}
-                height="175px"
-                minimumWidth={"100px"}
-              />
+              <SimilarMovies movieId={movieId} />
             </Box>
           </HStack>
         </VStack>

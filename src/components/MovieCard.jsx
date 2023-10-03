@@ -7,7 +7,7 @@ import turnicate from "../utils/turnicate";
 import { BiStar } from "react-icons/bi";
 import { BsFillPlayCircleFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
-const MovieCard = ({ movieData }) => {
+const MovieCard = ({ movieData, h = 250 }) => {
   const [isHovering, setIsHovering] = useState(false);
 
   const handleMouseEnter = () => {
@@ -24,7 +24,7 @@ const MovieCard = ({ movieData }) => {
         onMouseLeave={handleMouseLeave}
       >
         <Image
-          h={250}
+          h={h}
           w="full"
           borderRadius={"md"}
           objectFit="cover"
