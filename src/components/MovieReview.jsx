@@ -3,6 +3,7 @@ import { Box, VStack, Text, HStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import ExpandableText from "../utils/ExpandableText";
 import { Spinner } from "@chakra-ui/react";
+import { MdOutlineSmsFailed } from "react-icons/md";
 
 const MovieReview = ({ movieId }) => {
   const { isLoading, isError, data } = useQuery(
@@ -31,7 +32,16 @@ const MovieReview = ({ movieId }) => {
       </HStack>
     );
   }
-
+  if (data.length == 0) {
+    return (
+      <VStack mt={10} justify={"center"} w="full">
+        <MdOutlineSmsFailed fill="grey" size={"40"} />
+        <Text color={"grey"} fontSize={"md"}>
+          Nothing to show
+        </Text>
+      </VStack>
+    );
+  }
   return (
     <VStack alignItems={"flex-start"} gap={5}>
       {data.map((author) => {
