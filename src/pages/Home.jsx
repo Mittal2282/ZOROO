@@ -1,6 +1,7 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Box, Text, SimpleGrid, SkeletonText, Heading } from "@chakra-ui/react";
-import Navbar from "../components/Navbar";
 import MovieCard from "../components/MovieCard";
 import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import { useState, useRef, useCallback } from "react";
@@ -10,28 +11,36 @@ const Home = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [movies, setMovies] = useState([]);
 
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   const { isLoading, isError } = useQuery(
     ["popular", pageNumber],
     async () => {
-      const delay = Math.floor(Math.random() * (4000 - 2000 + 1)) + 2000;
-      const delayPromise = new Promise((resolve) => {
-        setTimeout(resolve, delay);
-      });
-      await delayPromise;
-      let response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageNumber}`,
-        {
-          method: "GET",
-          headers: {
-            accept: "application/json",
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODg0NjAxOTM1YmZmMmE5MmUwNmVjN2ZmMjc5N2IzMyIsInN1YiI6IjY0OTIyNjBiZWRhNGI3MDBlYzRiNGE4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vxkjHIi3cqFyE-vt-MCUQBPJOTaVKa57_8iIZm-n_hU",
-          },
-        }
-      );
-      let data = await response.json();
-      console.log(data.results);
-      return data.results;
+      // const delay = 1000;
+      // const delayPromise = new Promise((resolve) => {
+      //   setTimeout(resolve, delay);
+      // });
+      // await delayPromise;
+      try {
+        let response = await fetch(
+          `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageNumber}`,
+          {
+            method: "GET",
+            headers: {
+              accept: "application/json",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODg0NjAxOTM1YmZmMmE5MmUwNmVjN2ZmMjc5N2IzMyIsInN1YiI6IjY0OTIyNjBiZWRhNGI3MDBlYzRiNGE4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vxkjHIi3cqFyE-vt-MCUQBPJOTaVKa57_8iIZm-n_hU",
+            },
+          }
+        );
+        let data = await response.json();
+        return data.results;
+      } catch (error) {
+        console.log(error);
+      }
     },
     {
       onSuccess: (newData) => {
@@ -58,9 +67,7 @@ const Home = () => {
   if (isError) {
     return <Box>Error</Box>;
   }
-
   const randomIndex = Math.floor(Math.random() * movies.length);
-
   return (
     <Box pb={5}>
       <MovieBanner movie={movies[randomIndex]} />
@@ -90,7 +97,13 @@ const Home = () => {
               </Text>
             )}
           </Box>
-          {isLoading && pageNumber == 1 && <MovieListSkeleton />}
+          {((isLoading && pageNumber == 1) || movies.length === 0) && (
+            <MovieListSkeleton
+              numBoxes={20}
+              height={250}
+              minimumWidth="150px"
+            />
+          )}
           {
             <SimpleGrid minChildWidth="150px" spacing="20px">
               {movies.map((movie, index) => {
@@ -105,7 +118,13 @@ const Home = () => {
               })}
             </SimpleGrid>
           }
-          {isLoading && pageNumber != 1 && <MovieListSkeleton />}
+          {isLoading && pageNumber != 1 && (
+            <MovieListSkeleton
+              numBoxes={20}
+              height={250}
+              minimumWidth="150px"
+            />
+          )}
         </Box>
       </Box>
     </Box>

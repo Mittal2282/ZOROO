@@ -1,9 +1,12 @@
-const truncate = (e, charLength) => {
+const truncate = (e, charLength, showDots = true) => {
   if (e.length <= charLength) {
     return e;
   } else {
     const truncatedString = e.slice(0, charLength);
-    return `${truncatedString} ...`;
+    if (showDots) {
+      return `${truncatedString} ...`;
+    }
+    return `${truncatedString} `;
   }
 };
 

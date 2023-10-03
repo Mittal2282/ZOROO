@@ -1,9 +1,9 @@
 import { Box, Skeleton, SkeletonText } from "@chakra-ui/react";
 
-const MovieCardSkeleton = () => {
+const MovieCardSkeleton = ({ height }) => {
   return (
     <Box>
-      <Skeleton height={250} />
+      <Skeleton height={height} />
       <SkeletonText mt={2} skeletonHeight={10} noOfLines={1} />
     </Box>
   );
