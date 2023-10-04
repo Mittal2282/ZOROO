@@ -45,6 +45,9 @@ const SimilarMovies = ({ movieId }) => {
             if(index>=9){
                 return null
             }
+            if(item.poster_path===null){
+              return null
+            }
           return (
             <Box>
               <MovieCard h={"175px"} movieData={item} />
@@ -58,45 +61,3 @@ const SimilarMovies = ({ movieId }) => {
 
 export default SimilarMovies;
 
-// adult
-// :
-// false
-// backdrop_path
-// :
-// "/4JNiBoqx110teUp0ZKLEDQeeSuk.jpg"
-// genre_ids
-// :
-// (2) [18, 53]
-// id
-// :
-// 924572
-// original_language
-// :
-// "en"
-// original_title
-// :
-// "Mr. Dorothy"
-// overview
-// :
-// "A fairytale revenge story by Gabriel Bisset-Smith."
-// popularity
-// :
-// 0.626
-// poster_path
-// :
-// "/lifpThGDBsRAvDAoDq9xVE41RTC.jpg"
-// release_date
-// :
-// "2009-12-02"
-// title
-// :
-// "Mr. Dorothy"
-// video
-// :
-// false
-// vote_average
-// :
-// 4
-// vote_count
-// :
-// 1
