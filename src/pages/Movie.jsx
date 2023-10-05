@@ -3,7 +3,6 @@ import { useParams, useLocation } from "react-router";
 import { Box, HStack, Skeleton, SkeletonText, VStack } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import MovieDetailSkeleton from "../components/skeleton/MovieDetailSkeleton";
-import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import MovieDetail from "../components/MovieDetail";
 import Navbar from "../components/Navbar";
 import MovieDetailBanner from "../components/MovieDetailBanner";

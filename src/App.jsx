@@ -5,6 +5,7 @@ import "./App.css";
 import Movie from "./pages/Movie";
 import theme from "./theme";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import Genre from "./pages/Genre";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movie/:movieId" element={<Movie />} />
+          <Route path="/genre/:genreId" element={<Genre/>}/>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>
