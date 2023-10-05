@@ -16,7 +16,7 @@ const Genre = () => {
     ["genre", genreId, pageNumber],
     async () => {
       let response = await fetch(
-        `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}`,
+        `https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=${pageNumber}&with_genres=${genreId}`,
         {
           method: "GET",
           headers: {
@@ -24,10 +24,10 @@ const Genre = () => {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODg0NjAxOTM1YmZmMmE5MmUwNmVjN2ZmMjc5N2IzMyIsInN1YiI6IjY0OTIyNjBiZWRhNGI3MDBlYzRiNGE4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vxkjHIi3cqFyE-vt-MCUQBPJOTaVKa57_8iIZm-n_hU",
           },
-          params: {
-            with_genres: [genreId],
-            page: pageNumber,
-          },
+          // params: {
+          //   with_genres: [genreId],
+          //   page: pageNumber,
+          // },
         }
       );
 
