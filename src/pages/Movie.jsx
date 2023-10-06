@@ -91,9 +91,6 @@ function Movie() {
           </HStack>
         </VStack>
       )}
-      <Box mt={"75px"} w={"full"} backgroundColor={"black"} h={"27vh"} zIndex={-4}> 
-        <Footer />
-      </Box>
     </VStack>
   );
 }
