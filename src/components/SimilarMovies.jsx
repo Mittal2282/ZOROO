@@ -1,6 +1,14 @@
 import React from "react";
-import { Box, Heading, SimpleGrid, SkeletonText } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  SimpleGrid,
+  SkeletonText,
+  VStack,
+  Text,
+} from "@chakra-ui/react";
 import MovieListSkeleton from "./skeleton/MovieListSkeleton";
+import { MdOutlineSmsFailed } from "react-icons/md";
 
 import { useQuery } from "@tanstack/react-query";
 import MovieCard from "./MovieCard";
@@ -34,7 +42,22 @@ const SimilarMovies = ({ movieId }) => {
       </Box>
     );
   }
- 
+
+  if (data.length == 0) {
+    return (
+      <VStack gap={20} mt={10} justify={"center"} w="full">
+        <Heading alignSelf={"flex-start"} mb={5} size={"lg"}>
+          Similar Movies
+        </Heading>
+        <VStack>
+          <MdOutlineSmsFailed fill="grey" size={"40"} />
+          <Text color={"grey"} fontSize={"md"}>
+            Nothing to show
+          </Text>
+        </VStack>
+      </VStack>
+    );
+  }
 
   return (
     <Box gap={2} w={"full"}>
@@ -42,13 +65,13 @@ const SimilarMovies = ({ movieId }) => {
         Similar Movies
       </Heading>
       <SimpleGrid gap={5} minChildWidth={"120px"}>
-        {data.map((item,index) => {
-            if(index>=9){
-                return null
-            }
-            if(item.poster_path===null){
-              return null
-            }
+        {data.map((item, index) => {
+          if (index >= 9) {
+            return null;
+          }
+          if (item.poster_path === null) {
+            return null;
+          }
           return (
             <Box>
               <MovieCard h={"175px"} movieData={item} />
@@ -61,4 +84,3 @@ const SimilarMovies = ({ movieId }) => {
 };
 
 export default SimilarMovies;
-

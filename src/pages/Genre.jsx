@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Box, SkeletonText, SimpleGrid, Text } from "@chakra-ui/react";
@@ -13,6 +13,13 @@ const Genre = () => {
   const [movies, setMovies] = useState([]);
   const param = useParams();
   let genreId = param.genreId;
+
+
+
+  useEffect(()=>{
+    setMovies([])
+  },[genreId])
+
   const { isLoading, isError, data } = useQuery(
     ["genre", genreId, pageNumber],
     async () => {
@@ -29,7 +36,7 @@ const Genre = () => {
       );
 
       let data = await response.json();
-
+        
       return data.results;
     },
     {
@@ -45,7 +52,7 @@ const Genre = () => {
       if (isLoading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && pageNumber < 500) {
+        if (entries[0].isIntersecting && data.length!=0) {
           setPageNumber(pageNumber + 1);
         }
       });
