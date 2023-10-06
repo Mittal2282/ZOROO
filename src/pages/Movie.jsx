@@ -7,7 +7,6 @@ import MovieDetail from "../components/MovieDetail";
 import Navbar from "../components/Navbar";
 import MovieDetailBanner from "../components/MovieDetailBanner";
 import SimilarMovies from "../components/SimilarMovies";
-import Footer from "../components/Footer";
 import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 
 function Movie() {
@@ -34,6 +33,12 @@ function Movie() {
       return data;
     }
   );
+
+  useEffect(() => {
+    if (data) {
+      document.title = `${data.original_title} - Zoro`;
+    }
+  }, [data]);
 
   const { pathname } = useLocation();
   useEffect(() => {
@@ -96,83 +101,3 @@ function Movie() {
 }
 
 export default Movie;
-
-// Object
-// adult
-// :
-// false
-// backdrop_path
-// :
-// "/c6Splshb8lb2Q9OvUfhpqXl7uP0.jpg"
-// belongs_to_collection
-// :
-// null
-// budget
-// :
-// 0
-// genres
-// :
-// (2) [{…}, {…}]
-// homepage
-// :
-// "https://www.openroadfilms.com/movies/kandahar"
-// id
-// :
-// 717930
-// imdb_id
-// :
-// "tt5761544"
-// original_language
-// :
-// "en"
-// original_title
-// :
-// "Kandahar"
-// overview
-// :
-// "After his mission is exposed, an undercover CIA operative stuck deep in hostile territory in Afghanistan must fight his way out, alongside his Afghan translator, to an extraction point in Kandahar, all whilst avoiding elite enemy forces and foreign spies tasked with hunting them down."
-// popularity
-// :
-// 691.37
-// poster_path
-// :
-// "/lCanGgsqF4xD2WA5NF8PWeT3IXd.jpg"
-// production_companies
-// :
-// (4) [{…}, {…}, {…}, {…}]
-// production_countries
-// :
-// (2) [{…}, {…}]
-// release_date
-// :
-// "2023-05-25"
-// revenue
-// :
-// 3000000
-// runtime
-// :
-// 119
-// spoken_languages
-// :
-// [{…}]
-// status
-// :
-// "Released"
-// tagline
-// :
-// "The only thing more dangerous than the mission is the escape."
-// title
-// :
-// "Kandahar"
-// video
-// :
-// false
-// vote_average
-// :
-// 6.892
-// vote_count
-// :
-// 590
-// [[Prototype]]
-// :
-// Object

@@ -1,8 +1,12 @@
 import { Center, Box, Text, VStack, Heading, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Error = () => {
+  useEffect(() => {
+    document.title = "Page not found - Zoro";
+  }, []);
+
   return (
     <Center w={"full"}>
       <VStack mt={"20vh"} w={"full"}>
@@ -17,9 +21,7 @@ const Error = () => {
         </Text>
         <Box mt={"40px"}>
           <Link to="/">
-            <Button colorScheme="teal" size="md">
-              Go to Homepage
-            </Button>
+            <Button size="md">Go to Homepage</Button>
           </Link>
         </Box>
       </VStack>

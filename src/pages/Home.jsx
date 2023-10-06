@@ -16,14 +16,13 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
+  useEffect(() => {
+    document.title = "Zoro";
+  }, []);
+
   const { isLoading, isError } = useQuery(
     ["popular", pageNumber],
     async () => {
-      // const delay = 1000;
-      // const delayPromise = new Promise((resolve) => {
-      //   setTimeout(resolve, delay);
-      // });
-      // await delayPromise;
       try {
         let response = await fetch(
           `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${pageNumber}`,

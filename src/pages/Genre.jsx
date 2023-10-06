@@ -14,11 +14,10 @@ const Genre = () => {
   const param = useParams();
   let genreId = param.genreId;
 
-
-
-  useEffect(()=>{
-    setMovies([])
-  },[genreId])
+  useEffect(() => {
+    setMovies([]);
+    document.title = `${id_gener_map[genreId]} Movies - Zoro`;
+  }, [genreId]);
 
   const { isLoading, isError, data } = useQuery(
     ["genre", genreId, pageNumber],
@@ -36,7 +35,7 @@ const Genre = () => {
       );
 
       let data = await response.json();
-        
+
       return data.results;
     },
     {
@@ -52,7 +51,7 @@ const Genre = () => {
       if (isLoading) return;
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting && data.length!=0) {
+        if (entries[0].isIntersecting && data.length != 0) {
           setPageNumber(pageNumber + 1);
         }
       });
