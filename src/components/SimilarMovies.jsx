@@ -74,7 +74,7 @@ const SimilarMovies = ({ movieId }) => {
           }
           return (
             <Box>
-              <MovieCard h={"175px"} movieData={item} />
+              <MovieCard h={"225px"} movieData={item} />
             </Box>
           );
         })}
