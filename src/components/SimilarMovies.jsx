@@ -34,6 +34,7 @@ const SimilarMovies = ({ movieId }) => {
       </Box>
     );
   }
+ 
 
   return (
     <Box gap={2} w={"full"}>

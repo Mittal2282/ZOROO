@@ -6,6 +6,7 @@ import { useState, useRef, useCallback } from "react";
 import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import MovieCard from "../components/MovieCard";
 import { id_gener_map } from "../utils/genre";
+import Navbar from "../components/Navbar";
 
 const Genre = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -24,10 +25,6 @@ const Genre = () => {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODg0NjAxOTM1YmZmMmE5MmUwNmVjN2ZmMjc5N2IzMyIsInN1YiI6IjY0OTIyNjBiZWRhNGI3MDBlYzRiNGE4NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vxkjHIi3cqFyE-vt-MCUQBPJOTaVKa57_8iIZm-n_hU",
           },
-          // params: {
-          //   with_genres: [genreId],
-          //   page: pageNumber,
-          // },
         }
       );
 
@@ -63,7 +60,10 @@ const Genre = () => {
 
   return (
     <Box>
-      <Box mx={10}>
+      <Box mt={2} w="full">
+        <Navbar />
+      </Box>
+      <Box mx={20}>
         <Box mt={5} mb={5}>
           {isLoading && pageNumber == 1 ? (
             <SkeletonText skeletonHeight={10} w={150} noOfLines={1} />
