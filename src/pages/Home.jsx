@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Box, Text, SimpleGrid, SkeletonText, Heading } from "@chakra-ui/react";
@@ -12,6 +12,7 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
 
   const { pathname } = useLocation();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
@@ -66,10 +67,10 @@ const Home = () => {
   if (isError) {
     return <Box>Error</Box>;
   }
-  const randomIndex = Math.floor(Math.random() * movies.length);
+
   return (
     <Box pb={5}>
-      <MovieBanner movie={movies[randomIndex]} />
+      <MovieBanner movie={movies[0]} />
       <Box px={20}>
         <Box py={5}>
           <Text color={"grey"} fontSize={"xs"}>
