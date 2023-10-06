@@ -6,6 +6,7 @@ import Movie from "./pages/Movie";
 import theme from "./theme";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Genre from "./pages/Genre";
+import Error from "./pages/Error";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/movie/:movieId" element={<Movie />} />
           <Route path="/genre/:genreId" element={<Genre/>}/>
+          <Route path="*" element={<Error/>}/>
         </Routes>
       </BrowserRouter>
     </ChakraProvider>

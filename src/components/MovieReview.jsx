@@ -44,7 +44,8 @@ const MovieReview = ({ movieId }) => {
   }
   return (
     <VStack alignItems={"flex-start"} gap={5}>
-      {data.map((author) => {
+      {data.map((author,index) => {
+       
         return (
           <VStack w={"full"} alignItems={"flex-start"} gap={2}>
             <Text>{author.author}</Text>

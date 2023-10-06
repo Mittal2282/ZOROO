@@ -7,6 +7,8 @@ import MovieDetail from "../components/MovieDetail";
 import Navbar from "../components/Navbar";
 import MovieDetailBanner from "../components/MovieDetailBanner";
 import SimilarMovies from "../components/SimilarMovies";
+import Footer from "../components/Footer";
+import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 
 function Movie() {
   const param = useParams();
@@ -42,7 +44,7 @@ function Movie() {
     return <Box>Error</Box>;
   }
   return (
-    <VStack mb={"15rem"}>
+    <VStack>
       {isLoading && (
         <>
           <Box width={"full"} height={"50vh"}>
@@ -51,6 +53,14 @@ function Movie() {
           <HStack pt={10} px={20} alignItems={"flex-start"} gap={10} w={"full"}>
             <Box flexGrow={1}>
               <MovieDetailSkeleton />
+            </Box>
+            <Box w={"30%"}>
+              <SkeletonText mb={5} skeletonHeight={10} w={200} noOfLines={1} />
+              <MovieListSkeleton
+                numBoxes={9}
+                height="175px"
+                minimumWidth={"100px"}
+              />
             </Box>
           </HStack>
         </>
@@ -81,6 +91,9 @@ function Movie() {
           </HStack>
         </VStack>
       )}
+      <Box mt={"75px"} w={"full"} backgroundColor={"black"} h={"27vh"} zIndex={-4}> 
+        <Footer />
+      </Box>
     </VStack>
   );
 }
