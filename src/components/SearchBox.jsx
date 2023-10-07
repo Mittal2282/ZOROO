@@ -5,14 +5,13 @@ import { useNavigate } from "react-router-dom";
 
 const SearchBox = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handleNavigation = (e) => {
-    if(e.keyCode===13){
-      
-      navigate(`/search?q=${searchTerm}`)
+    if (e.keyCode === 13) {
+      navigate(`/search?q=${searchTerm}`);
     }
-  }
+  };
 
   return (
     <Box>
