@@ -75,7 +75,7 @@ function Search() {
             <SkeletonText skeletonHeight={10} w={150} noOfLines={1} />
           ) : (
             <Text fontWeight={"bold"} fontSize={"2xl"}>
-              Searched movie results
+              Search results for "{searchMovie}"
             </Text>
           )}
         </Box>
