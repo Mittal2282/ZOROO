@@ -1,8 +1,25 @@
-import { Box, VStack, Text, Heading, Tooltip, Button } from "@chakra-ui/react";
+import {
+  Box,
+  VStack,
+  Text,
+  Heading,
+  Tooltip,
+  Button,
+  HStack,
+} from "@chakra-ui/react";
 import MovieBannerSkeleton from "./skeleton/MovieBannerSkeleton";
 import truncate from "../utils/turnicate";
 import Navbar from "./Navbar";
 import { Link } from "react-router-dom";
+
+import {
+  WhatsappShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  LinkedinIcon,
+  WhatsappIcon,
+  TwitterIcon,
+} from "react-share";
 
 function MovieBanner({ movie }) {
   if (movie === undefined) {
@@ -80,6 +97,34 @@ function MovieBanner({ movie }) {
         right={0}
         zIndex={1}
       />
+
+      <HStack
+        pos={"absolute"}
+        width={"full"}
+        bottom={"2rem"}
+        zIndex={10}
+        justifyContent={"center"}
+        gap={5}
+      >
+        <WhatsappShareButton
+          title="Hey Checkout this awesome website, where you can watch movies for free."
+          url={"https://zoro-psi.vercel.app/"}
+        >
+          <WhatsappIcon size={40} round={true} />
+        </WhatsappShareButton>
+        <LinkedinShareButton
+          title="Hey Checkout this awesome website, where you can watch movies for free."
+          url={"https://zoro-psi.vercel.app/"}
+        >
+          <LinkedinIcon size={40} round={true} />
+        </LinkedinShareButton>
+        <TwitterShareButton
+          title="Hey Checkout this awesome website, where you can watch movies for free."
+          url={"https://zoro-psi.vercel.app/"}
+        >
+          <TwitterIcon size={40} round={true} />
+        </TwitterShareButton>
+      </HStack>
     </Box>
   );
 }
