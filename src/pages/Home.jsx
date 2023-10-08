@@ -112,7 +112,10 @@ const Home = () => {
             />
           )}
           {
-            <SimpleGrid minChildWidth="150px" spacing="20px">
+            <SimpleGrid
+              gridTemplateColumns={`repeat(auto-fill , minmax(150px , 1fr))`}
+              spacing="20px"
+            >
               {movies.map((movie, index) => {
                 return (
                   <Box

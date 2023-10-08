@@ -64,7 +64,10 @@ const SimilarMovies = ({ movieId }) => {
       <Heading mb={5} size={"lg"}>
         Similar Movies
       </Heading>
-      <SimpleGrid gap={5} minChildWidth={"120px"}>
+      <SimpleGrid
+        gap={5}
+        gridTemplateColumns={`repeat(auto-fill , minmax(120px , 1fr))`}
+      >
         {data.map((item, index) => {
           if (index >= 9) {
             return null;

@@ -2,10 +2,10 @@ import React from "react";
 import { useLocation, useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "../components/Navbar";
-import { Box, Text, SimpleGrid,SkeletonText } from "@chakra-ui/react";
+import { Box, Text, SimpleGrid, SkeletonText } from "@chakra-ui/react";
 import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import MovieCard from "../components/MovieCard";
-import { useState,useRef,useCallback,useEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 function Search() {
   const [pageNumber, setPageNumber] = useState(1);
@@ -20,7 +20,7 @@ function Search() {
   }, [searchMovie]);
 
   const { isLoading, isError, data } = useQuery(
-    ["searchmovie", searchMovie,pageNumber],
+    ["searchmovie", searchMovie, pageNumber],
     async () => {
       let response = await fetch(
         `https://api.themoviedb.org/3/search/movie?page=${pageNumber}&query=${searchMovie}`,
@@ -83,10 +83,14 @@ function Search() {
           <MovieListSkeleton numBoxes={20} height={250} minimumWidth="150px" />
         )}
         {
-          <SimpleGrid minChildWidth="150px" spacing="20px">
+          <SimpleGrid
+            gridTemplateColumns={`repeat(auto-fill , minmax(150px , 1fr))`}
+            spacing="20px"
+          >
             {movies.map((movie, index) => {
               return (
                 <Box
+                  maxW={"175px"}
                   key={index}
                   ref={index + 1 == movies.length ? lastMovieItemRef : null}
                 >

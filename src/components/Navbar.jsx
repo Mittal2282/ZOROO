@@ -39,7 +39,10 @@ const Navbar = () => {
           <PopoverContent w={400}>
             <PopoverArrow />
             <PopoverBody p={5}>
-              <SimpleGrid minChildWidth="100px" spacing="10px">
+              <SimpleGrid
+                gridTemplateColumns={`repeat(auto-fill , minmax(100px , 1fr))`}
+                spacing="10px"
+              >
                 {Object.keys(gener_id_map).map((key) => {
                   return (
                     <Box>

@@ -83,7 +83,10 @@ const Genre = () => {
           <MovieListSkeleton numBoxes={20} height={250} minimumWidth="150px" />
         )}
         {
-          <SimpleGrid minChildWidth="150px" spacing="20px">
+          <SimpleGrid
+            gridTemplateColumns={`repeat(auto-fill , minmax(100px , 1fr))`}
+            spacing="20px"
+          >
             {movies.map((movie, index) => {
               return (
                 <Box
