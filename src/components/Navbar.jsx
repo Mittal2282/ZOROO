@@ -22,8 +22,8 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <HStack gap={5} px={"20"}>
-      <Box>
+    <HStack gap={5} px={{ md: "20", sm: "5" }}>
+      <Box flexShrink={0}>
         <Image w={"20"} src={logo} />
       </Box>
       <HStack color={"grey"} fontSize={"sm"} gap={2}>
@@ -57,7 +57,7 @@ const Navbar = () => {
           </PopoverContent>
         </Popover>
       </HStack>
-      <Box ml={"auto"}>
+      <Box display={{ md: "block", base: "none" }} ml={"auto"}>
         <SearchBox />
       </Box>
     </HStack>

@@ -5,6 +5,11 @@ const config = {
   useSystemColorMode: false,
 };
 
-const theme = extendTheme({ config });
+const theme = extendTheme({
+  config,
+  breakpoints: {
+    md: "62em",
+  },
+});
 
 export default theme;
