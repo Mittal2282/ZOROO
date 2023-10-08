@@ -1,14 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useLocation } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import {
-  Box,
-  Text,
-  SimpleGrid,
-  SkeletonText,
-  Heading,
-  HStack,
-} from "@chakra-ui/react";
+import { Box, Text, SimpleGrid, SkeletonText } from "@chakra-ui/react";
 import MovieCard from "../components/MovieCard";
 import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import { useState, useRef, useCallback } from "react";
