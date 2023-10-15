@@ -6,6 +6,7 @@ import {
   Tooltip,
   Button,
   HStack,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import MovieBannerSkeleton from "./skeleton/MovieBannerSkeleton";
 import truncate from "../utils/turnicate";
@@ -26,13 +27,15 @@ function MovieBanner({ movie }) {
     return <MovieBannerSkeleton />;
   }
 
+  const [isMobile] = useMediaQuery("(max-width: 62em)");
+
   return (
     <Box
       backgroundPosition="center"
       backgroundRepeat={"no-repeat"}
       backgroundSize={"cover"}
       backgroundImage={`url("https://image.tmdb.org/t/p/original/${movie.backdrop_path}")`}
-      h="80vh"
+      h={{ md: "80vh", base: "60vh" }}
       w="full"
       pos={"relative"}
     >
@@ -43,18 +46,19 @@ function MovieBanner({ movie }) {
       <VStack
         transform={"translateY(-50%)"}
         alignItems={"flex-start"}
-        w={"500px"}
+        w={{ md: "500px", base: "full" }}
         zIndex={10}
         pos="absolute"
         top="50%"
-        left="20"
+        px={{ md: 0, base: "5" }}
+        left={{ md: "20", base: "0" }}
       >
-        <Heading fontWeight={"bold"} size={"xl"}>
+        <Heading fontWeight={"bold"} size={{ md: "xl", base: "lg" }}>
           {movie.original_title}
         </Heading>
-        <Tooltip>
-          <Text fontSize={"sm"} color="grey">
-            {truncate(movie.overview, 170)}
+        <Tooltip outline={""}>
+          <Text fontSize={"sm"} w="100%" color="grey">
+            {truncate(movie.overview, isMobile ? 100 : 170)}
           </Text>
         </Tooltip>
         <Button mt={"5"} fontSize={"sm"} fontWeight={"sm"}>
@@ -130,46 +134,3 @@ function MovieBanner({ movie }) {
 }
 
 export default MovieBanner;
-
-// adult
-// :
-// false
-// backdrop_path
-// :
-// "/H6j5smdpRqP9a8UnhWp6zfl0SC.jpg"
-// genre_ids
-// :
-// (3) [28, 878, 12]
-// id
-// :
-// 565770
-// original_language
-// :
-// "en"
-// original_title
-// :
-// "Blue Beetle"
-// overview
-// :
-// "Recent college grad Jaime Reyes returns home full of aspirations for his future, only to find that home is not quite as he left it. As he searches to find his purpose in the world, fate intervenes when Jaime unexpectedly finds himself in possession of an ancient relic of alien biotechnology: the Scarab."
-// popularity
-// :
-// 3180.6
-// poster_path
-// :
-// "/mXLOHHc1Zeuwsl4xYKjKh2280oL.jpg"
-// release_date
-// :
-// "2023-08-16"
-// title
-// :
-// "Blue Beetle"
-// video
-// :
-// false
-// vote_average
-// :
-// 7.2
-// vote_count
-// :
-// 910

@@ -69,7 +69,7 @@ function Search() {
       <Box mt={2} w="full">
         <Navbar />
       </Box>
-      <Box mx={20}>
+      <Box w={{md: '100%',base: '90%'}} px={{md: 5,base: 0}} mx={{md: 0, base: 5}}>
         <Box mt={5} mb={5}>
           {isLoading && pageNumber == 1 ? (
             <SkeletonText skeletonHeight={10} w={150} noOfLines={1} />

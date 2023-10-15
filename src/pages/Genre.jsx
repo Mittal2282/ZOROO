@@ -7,12 +7,14 @@ import MovieListSkeleton from "../components/skeleton/MovieListSkeleton";
 import MovieCard from "../components/MovieCard";
 import { id_gener_map } from "../utils/genre";
 import Navbar from "../components/Navbar";
+import { useMediaQuery } from "@chakra-ui/react";
 
 const Genre = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [movies, setMovies] = useState([]);
   const param = useParams();
   let genreId = param.genreId;
+  const [isMobile] = useMediaQuery("(max-width: 62em)");
 
   useEffect(() => {
     setMovies([]);
@@ -69,40 +71,97 @@ const Genre = () => {
       <Box mt={2} w="full">
         <Navbar />
       </Box>
-      <Box mx={20}>
-        <Box mt={5} mb={5}>
-          {isLoading && pageNumber == 1 ? (
-            <SkeletonText skeletonHeight={10} w={150} noOfLines={1} />
-          ) : (
-            <Text fontWeight={"bold"} fontSize={"xl"}>
-              {id_gener_map[genreId]}
-            </Text>
-          )}
-        </Box>
-        {((isLoading && pageNumber == 1) || movies.length === 0) && (
-          <MovieListSkeleton numBoxes={20} height={250} minimumWidth="150px" />
-        )}
-        {
-          <SimpleGrid
-            gridTemplateColumns={`repeat(auto-fill , minmax(100px , 1fr))`}
-            spacing="20px"
-          >
-            {movies.map((movie, index) => {
-              return (
-                <Box
-                  key={index}
-                  ref={index + 1 == movies.length ? lastMovieItemRef : null}
-                >
-                  <MovieCard movieData={movie} />
-                </Box>
-              );
-            })}
-          </SimpleGrid>
-        }
-        {isLoading && pageNumber != 1 && (
-          <MovieListSkeleton numBoxes={20} height={250} minimumWidth="150px" />
-        )}
-      </Box>
+      {isMobile ? (
+        <>
+          <Box w='90%' mx={5}>
+            <Box mt={5} mb={5}>
+              {isLoading && pageNumber == 1 ? (
+                <SkeletonText skeletonHeight={10} w={150} noOfLines={1} />
+              ) : (
+                <Text fontWeight={"bold"} fontSize={"xl"}>
+                  {id_gener_map[genreId]}
+                </Text>
+              )}
+            </Box>
+            {((isLoading && pageNumber == 1) || movies.length === 0) && (
+              <MovieListSkeleton
+                numBoxes={20}
+                height={250}
+                minimumWidth="120px"
+              />
+            )}
+            {
+              <SimpleGrid
+                gridTemplateColumns={`repeat(auto-fill , minmax(120px , 1fr))`}
+                spacing="20px"
+              >
+                {movies.map((movie, index) => {
+                  return (
+                    <Box
+                      key={index}
+                      ref={index + 1 == movies.length ? lastMovieItemRef : null}
+                    >
+                      <MovieCard movieData={movie} />
+                    </Box>
+                  );
+                })}
+              </SimpleGrid>
+            }
+            {isLoading && pageNumber != 1 && (
+              <MovieListSkeleton
+                numBoxes={20}
+                height={250}
+                minimumWidth="120px"
+              />
+            )}
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box mx={20}>
+            <Box mt={5} mb={5}>
+              {isLoading && pageNumber == 1 ? (
+                <SkeletonText skeletonHeight={10} w={150} noOfLines={1} />
+              ) : (
+                <Text fontWeight={"bold"} fontSize={"xl"}>
+                  {id_gener_map[genreId]}
+                </Text>
+              )}
+            </Box>
+            {((isLoading && pageNumber == 1) || movies.length === 0) && (
+              <MovieListSkeleton
+                numBoxes={20}
+                height={250}
+                minimumWidth="150px"
+              />
+            )}
+            {
+              <SimpleGrid
+                gridTemplateColumns={`repeat(auto-fill , minmax(150px , 1fr))`}
+                spacing="20px"
+              >
+                {movies.map((movie, index) => {
+                  return (
+                    <Box
+                      key={index}
+                      ref={index + 1 == movies.length ? lastMovieItemRef : null}
+                    >
+                      <MovieCard movieData={movie} />
+                    </Box>
+                  );
+                })}
+              </SimpleGrid>
+            }
+            {isLoading && pageNumber != 1 && (
+              <MovieListSkeleton
+                numBoxes={20}
+                height={250}
+                minimumWidth="150px"
+              />
+            )}
+          </Box>
+        </>
+      )}
     </Box>
   );
 };

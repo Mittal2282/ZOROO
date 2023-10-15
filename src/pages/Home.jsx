@@ -71,7 +71,7 @@ const Home = () => {
   return (
     <Box pb={5}>
       <MovieBanner movie={movies[0]} />
-      <Box px={20}>
+      <Box px={{ md: 20, base: 5 }}>
         <Box py={5}>
           <Text color={"grey"} fontSize={"xs"}>
             Are you looking for the best movie site to make the most of your
