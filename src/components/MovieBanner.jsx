@@ -49,7 +49,7 @@ function MovieBanner({ movie }) {
         w={{ md: "500px", base: "full" }}
         zIndex={10}
         pos="absolute"
-        top="50%"
+        top={{md: "50%",base:"80%"}}
         px={{ md: 0, base: "5" }}
         left={{ md: "20", base: "0" }}
       >
@@ -105,7 +105,8 @@ function MovieBanner({ movie }) {
       <HStack
         pos={"absolute"}
         width={"full"}
-        bottom={"2rem"}
+        pl={{md:0,base:40}}
+        bottom={{md:"2rem",base:"0rem"}}
         zIndex={10}
         justifyContent={"center"}
         gap={5}
